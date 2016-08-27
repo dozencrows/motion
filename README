@@ -1,5 +1,19 @@
-MMAL README
------------
+Even more experimental MMAL README
+----------------------------------
+Forked from dozencrows superb work.
+
+Added option to output both secondary and normal pictures.
+The smaller picture is a good thumbnail if you need to reduce network load.
+
+Manually merged updates from https://github.com/Mr-Dave/motion so that it works with libavformat56 on Rasbian Jessie.
+This needs testing - in particular timelapse movies and on older versions of libavformat.
+
+Added configs/motion-mmalcam-both.conf.
+Works on Pi 2 at 640x480 at 4 fps with x4 upscale so stills are 2560x1920.
+Uses up to about 50% of one cpu (so about 13% of available cpu).
+
+Original MMAL README
+--------------------
 This is an experimental version of motion that adds support for the
 Raspberry Pi's CSI camera module, via the MMAL API.
 

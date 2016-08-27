@@ -1133,6 +1133,12 @@ void put_fixed_mask(struct context *cnt, const char *file)
 void put_image(struct context *cnt, char* fullfilename, struct image_data * imgdat, int ftype)
 {
     if (imgdat->secondary_image && cnt->conf.output_secondary_pictures) {
+        if (cnt->conf.output_both_pictures) {
+            put_picture(cnt, fullfilename, imgdat->image, ftype);
+            fullfilename[strlen(fullfilename) - 3] = 'J';
+            fullfilename[strlen(fullfilename) - 2] = 'P';
+            fullfilename[strlen(fullfilename) - 1] = 'G';
+        }
         if (cnt->imgs.secondary_type == SECONDARY_TYPE_RAW) {
             put_sized_picture(cnt, fullfilename, imgdat->secondary_image, cnt->imgs.secondary_width, cnt->imgs.secondary_height, ftype);
         }

@@ -633,7 +633,7 @@ static void event_ffmpeg_newfile(struct context *cnt, int type ATTRIBUTE_UNUSED,
         if ((cnt->ffmpeg_output =
             ffmpeg_open((char *)cnt->conf.ffmpeg_video_codec, cnt->newfilename, y, u, v,
                          width, height, cnt->movie_fps, cnt->conf.ffmpeg_bps,
-                         cnt->conf.ffmpeg_vbr)) == NULL) {
+                         cnt->conf.ffmpeg_vbr,TIMELAPSE_NONE)) == NULL) {
             MOTION_LOG(ERR, TYPE_EVENTS, SHOW_ERRNO, "%s: ffopen_open error creating (new) file [%s]",
                        cnt->newfilename);
             cnt->finish = 1;
@@ -661,7 +661,7 @@ static void event_ffmpeg_newfile(struct context *cnt, int type ATTRIBUTE_UNUSED,
         if ((cnt->ffmpeg_output_debug =
             ffmpeg_open((char *)cnt->conf.ffmpeg_video_codec, cnt->motionfilename, y, u, v,
                          cnt->imgs.width, cnt->imgs.height, cnt->movie_fps, cnt->conf.ffmpeg_bps,
-                         cnt->conf.ffmpeg_vbr)) == NULL) {
+                         cnt->conf.ffmpeg_vbr,TIMELAPSE_NONE)) == NULL) {
             MOTION_LOG(ERR, TYPE_EVENTS, SHOW_ERRNO, "%s: ffopen_open error creating (motion) file [%s]",
                        cnt->motionfilename);
             cnt->finish = 1;
@@ -685,6 +685,7 @@ static void event_ffmpeg_timelapse(struct context *cnt,
     if (!cnt->ffmpeg_timelapse) {
         char tmp[PATH_MAX];
         const char *timepath;
+        char codec_mpeg[5] = "mpeg4";
 
         /*
          *  conf.timepath would normally be defined but if someone deleted it by control interface
@@ -714,9 +715,9 @@ static void event_ffmpeg_timelapse(struct context *cnt,
         }
 
         if ((cnt->ffmpeg_timelapse =
-            ffmpeg_open((char *)TIMELAPSE_CODEC, cnt->timelapsefilename, y, u, v,
+            ffmpeg_open(codec_mpeg, cnt->timelapsefilename, y, u, v,
                          width, height, 24, cnt->conf.ffmpeg_bps,
-                         cnt->conf.ffmpeg_vbr)) == NULL) {
+                         cnt->conf.ffmpeg_vbr,TIMELAPSE_NEW)) == NULL) {
             MOTION_LOG(ERR, TYPE_EVENTS, SHOW_ERRNO, "%s: ffopen_open error creating "
                        "(timelapse) file [%s]", cnt->timelapsefilename);
             cnt->finish = 1;

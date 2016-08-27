@@ -157,6 +157,7 @@ struct config conf_template = {
     mmalcam_raw_capture_file:       NULL,
     mmalcam_buffer2_upscale:        0,
     mmalcam_buffer2_jpeg:           0,
+    output_both_pictures:           0,
 #endif
     text_changes:                   0,
     text_left:                      NULL,
@@ -485,6 +486,15 @@ config_param config_params[] = {
     CONF_OFFSET(mmalcam_raw_capture_file),
     copy_string,
     print_string
+    },
+    {
+    "output_both_pictures",
+    "# Output both primary and secondary pictures\n"
+    " Default: off",
+    0,
+    CONF_OFFSET(output_both_pictures),
+    copy_bool,
+    print_bool
     },
 #endif
     {
@@ -850,7 +860,7 @@ config_param config_params[] = {
     copy_string,
     print_string
     },
-    {
+/*    {
     "ffmpeg_deinterlace",
     "# Use ffmpeg to deinterlace video. Necessary if you use an analog camera\n"
     "# and see horizontal combing on moving objects in video or pictures.\n"
@@ -859,7 +869,7 @@ config_param config_params[] = {
     CONF_OFFSET(ffmpeg_deinterlace),
     copy_bool,
     print_bool
-    },
+    }, */
 #endif /* HAVE_FFMPEG */
 #ifdef HAVE_SDL
      {

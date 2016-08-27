@@ -65,7 +65,7 @@ struct config {
     int ffmpeg_output_secondary;
     int ffmpeg_bps;
     int ffmpeg_vbr;
-    int ffmpeg_deinterlace;
+/*    int ffmpeg_deinterlace; */
     const char *ffmpeg_video_codec;
 #ifdef HAVE_SDL
     int sdl_threadnr;
@@ -135,6 +135,7 @@ struct config {
     int mmalcam_buffer2_upscale;
     const char *mmalcam_raw_capture_file;
     int mmalcam_buffer2_jpeg;
+    int output_both_pictures;
 #endif
     int text_changes;
     const char *text_left;
